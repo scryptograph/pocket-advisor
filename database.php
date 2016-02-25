@@ -32,3 +32,4 @@ function create_student($fname, $lname){
 function student_login($username, $password){
 	return musql_result(mysql_query("SELECT COUNT(*) FROM STUDENTS INNER JOIN ACCOUNT ON STUDENTS.username = ACCOUNT.username WHERE ACCOUNT.username = '$username' and ACCOUNT.password='$password'"), 0);"))
 }
+
