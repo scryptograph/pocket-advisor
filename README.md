@@ -5,7 +5,7 @@ Website Repo.
 
 Development Team
 
-Samantha Lee (Fearless Leader / Product Owner)
+Samantha Le (Fearless Leader / Product Owner)
 Sabrina Benge (Scrum Master / Documentation Expert)
 Carlos Hernandez (Badass Dev. #1 / Database Design and Management)
 Mark Nissen (Badass Dev. #2 / Android Application Dev.)
