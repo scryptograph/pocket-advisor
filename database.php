@@ -24,32 +24,32 @@ function createUser($userID, $login, $password, $email, $firstName, $middleName,
 
 function createCourse($courseID, $course_name, $credit_hours, $description){
 
-	mysql_query("INSERT INTO User (courseID, course_name, credit_hours, description) VALUES ('$courseID', '$course_name', '$credit_hours', '$description');");
+	mysql_query("INSERT INTO Course (courseID, course_name, credit_hours, description) VALUES ('$courseID', '$course_name', '$credit_hours', '$description');");
 }
 
 function createDegreePlan($degreePlanID, $degreeName, $totalHours, $deptID){
 
-	mysql_query("INSERT INTO User (degreePlanID, degreeName, totalHours, deptID) VALUES ('$degreePlanID', '$degreeName', '$totalHours', '$deptID');");
+	mysql_query("INSERT INTO DegreePlan (degreePlanID, degreeName, totalHours, deptID) VALUES ('$degreePlanID', '$degreeName', '$totalHours', '$deptID');");
 }
 
 function createDepartment($departmentID, $departmentName, $collegeID){
 
-	mysql_query("INSERT INTO User (departmentID, departmentName, collegeID) VALUES ('$departmentID', '$departmentName', $collegeID');");
+	mysql_query("INSERT INTO Department (departmentID, departmentName, collegeID) VALUES ('$departmentID', '$departmentName', $collegeID');");
 }
 
 function createCollege($collegeID, $collegeName, $institutionID){
 
-	mysql_query("INSERT INTO User (collegeID, collegeName, institutionID) VALUES ('$collegeID', '$collegeName', '$institutionID');");
+	mysql_query("INSERT INTO College (collegeID, collegeName, institutionID) VALUES ('$collegeID', '$collegeName', '$institutionID');");
 }
 
 function createInstitution($institutionID, $institutionName){
 
-	mysql_query("INSERT INTO User (institutionID, institutionName) VALUES ('$institutionID', '$institutionName');");
+	mysql_query("INSERT INTO Institution (institutionID, institutionName) VALUES ('$institutionID', '$institutionName');");
 }
 
 function createPrereq($courseID, $courseID){
 
-	mysql_query("INSERT INTO User (courseID, courseID) VALUES ('$courseID', '$courseID');");
+	mysql_query("INSERT INTO Prereq (courseID, courseID) VALUES ('$courseID', '$courseID');");
 }
 
 function link_UserCourse($userID, $courseID, $grade, $date){
@@ -59,41 +59,55 @@ function link_UserCourse($userID, $courseID, $grade, $date){
 
 function link_UserDegreePlan($userID, $degreePlanID){
 
-	mysql_query("INSERT INTO User_Course (userID, degreePlanID) VALUES ('$userID', '$degreePlanID')");
+	mysql_query("INSERT INTO User_DegreePlan (userID, degreePlanID) VALUES ('$userID', '$degreePlanID')");
 }
 
 function link_DegreePlanCourse($degreePlanID, $courseID){
 
-	mysql_query("INSERT INTO User_Course (degreePlanID, courseID) VALUES ('$degreePlanID', '$courseID')");
+	mysql_query("INSERT INTO DegreePlan_Course (degreePlanID, courseID) VALUES ('$degreePlanID', '$courseID')");
 }
 
 //Get Functions
-// User can see all of their courses, prereqs, degree plans, departments, colleges, & institutions. 
+// User can see all courses, prereqs, degree plans, departments, colleges, & institutions that are in the database. 
+
 
 function getAllCourses(){
-	return mysql_query();
+	return mysql_query("SELECT * from Course;");
 }
 
 function getAllPrereqs(){
-	return mysql_query();
+	return mysql_query("SELECT * from Prereq;");
 }
 
 function getAllDegreePlans(){
-	return mysql_query();
+	return mysql_query("SELECT * from DegreePlan;");
 }
 
 function getAllDepartments(){
-	return mysql_query();
+	return mysql_query("SELECT * from Department;");
 }
 
 function getAllColleges(){
-	return mysql_query();
+	return mysql_query("SELECT * from College;");
 }
 
 function getAllInstitutions(){
-	return mysql_query();
+	return mysql_query("SELECT * from Institution;");
 }
 
+//User-specific Functions
+//Get all of a user's courses during a specific semester. 
+function getCoursesAssignedTo($userID, $date){
+	return mysql_query("SELECT * from User_Course where userID = '$userID' AND date = '$date'; ");
+}
 
+//Get all degree plans for a specific user
+function getDegreePlansAssignedTo($userID){
+	return mysql_query("SELECT * from User_DegreePlan where userID = '$userID';");
+}
+
+//Get all prereqs for a specific course.
+
+//Get 
 mysql_close($Link);
 ?>
