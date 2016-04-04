@@ -3,6 +3,8 @@
 $uname = "";
 $pword = "";
 $errorMessage = "";
+$num_rows = 0;
+
 //==========================================
 //	ESCAPE DANGEROUS SQL CHARACTERS
 //==========================================
@@ -41,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
 
-		$SQL = "SELECT * FROM login WHERE L1 = $uname ";
+		$SQL = "SELECT * FROM login WHERE L1 = $uname AND L2 = md5($pword)";
 		$result = mysql_query($SQL);
 		$num_rows = mysql_num_rows($result);
 
@@ -56,13 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				header ("Location: page1.php");
 			}
 			else {
+				//$errorMessage = "Invalid Login";
+				//session_start();
+				//$_SESSION['login'] = '';
+
 				session_start();
 				$_SESSION['login'] = "";
 				header ("Location: signup.php");
 			}	
 		}
 		else {
-			$errorMessage = "Error logging on foo";
+			$errorMessage = "Error logging on";
 		}
 
 	mysql_close($db_handle);
@@ -85,14 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 </head>
 <body>
 
-<FORM NAME ="form1" METHOD ="POST" ACTION ="login.php">
+<FORM NAME ="form1" METHOD ="POST" ACTION ="login3.php">
 
 Username: <INPUT TYPE = 'TEXT' Name ='username'  value="<?PHP print $uname;?>" maxlength="20">
 Password: <INPUT TYPE = 'TEXT' Name ='password'  value="<?PHP print $pword;?>" maxlength="16">
 
-<P align = center>
+<P>
 <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Login">
-</P>
+
 
 </FORM>
 
