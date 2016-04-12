@@ -128,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
   </div>
 </nav>
+<!-- End Navbar -->
 
 <div class="row">
     <div class="col-md-5 col-md-offset-1">
