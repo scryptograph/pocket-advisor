@@ -185,10 +185,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	</head>
 	<body>
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+
 
 
 <FORM NAME ="form1" METHOD ="POST" ACTION ="signup.php">
-<fieldset>
+
+	<form class="form-horizontal">
+  <div class="row">
+          <div class="col-lg-30">
+            <div class="well bs-component">
+              <form class="form-horizontal">
+                <fieldset>
 	<legend>Create New Account</legend>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Username</label>
