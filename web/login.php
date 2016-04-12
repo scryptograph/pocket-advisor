@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
 
-		$SQL = "SELECT * FROM login WHERE L1 = $uname ";
+		$SQL = "SELECT * FROM login WHERE L1 = $uname AND L2 = md5($pword)";
 		$result = mysql_query($SQL);
 		$num_rows = mysql_num_rows($result);
 
@@ -56,9 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				header ("Location: page1.php");
 			}
 			else {
-				session_start();
-				$_SESSION['login'] = "";
-				header ("Location: signup.php");
+        $errorMessage = "Username or Password Incorrect";
+				//session_start();
+				//$_SESSION['login'] = "";
+				//header ("Location: login.php");
 			}	
 		}
 		else {
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="login.php">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="about.php">About</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -127,9 +128,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
   </div>
 </nav>
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-1">
+
 <FORM NAME ="form1" METHOD ="POST" ACTION ="login.php">
 <form class="form-horizontal">
-  <fieldset>
+  <div class="row">
+          <div class="col-lg-30">
+            <div class="well bs-component">
+              <form class="form-horizontal">
+                <fieldset>
 	<legend>Admin Portal Login</legend>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Username</label>
@@ -149,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </fieldset>
 
 </FORM>
-
+</div></div>
 <P>
 <?PHP print $errorMessage;?>
 
