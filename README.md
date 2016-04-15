@@ -1,5 +1,5 @@
 # pocket-advisor
-Software Engineering Lab 1 - Texas Tech University - Sprint 16
+Degree Tracking Software - Android Application + Admin Portal Website
 
 Website Repo.
 
