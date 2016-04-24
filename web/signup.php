@@ -16,6 +16,11 @@
 
 $uname = "";
 $pword = "";
+$fname = "";
+$lname = "";
+$email = "";
+$role = "Student";
+$gpa = "NULL";
 $errorMessage = "";
 $num_rows = 0;
 
@@ -77,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$user_name = "root";
 	$pass_word = "";
-	$database = "login";
+	$database = "pocket-advisor";
 	$server = "127.0.0.1";
 
 	$db_handle = mysql_connect($server, $user_name, $pass_word);
@@ -92,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	//	CHECK THAT THE USERNAME IS NOT TAKEN
 	//====================================================================
 
-		$SQL = "SELECT * FROM login WHERE L1 = $uname";
+		$SQL = "SELECT * FROM user WHERE login = $uname";
 		$result = mysql_query($SQL);
 		$num_rows = mysql_num_rows($result);
 
@@ -102,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
 		else {
 
-			$SQL = "INSERT INTO login (L1, L2) VALUES ($uname, md5($pword))";
+			$SQL = "INSERT INTO user (login, password) VALUES ($uname, md5($pword))";
 
 			$result = mysql_query($SQL);
 
@@ -117,43 +122,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$_SESSION['login'] = "1";
 
 			header ("Location: page1.php");
-
 		}
-
 	}
 	else {
 		$errorMessage = "Database Not Found";
 	}
-
-
-
-
-	}
+}	
 
 }
 
 
 ?>
-
-	<html>
+<html>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Pocket Advisor</a>
-    </div>
+    <div class="bs-component">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="login.php">Pocket Advisor</a>
+          </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="login.php"> Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="about.php">About</a></li>
-        <li class="dropdown">
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="login.php">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="about.php">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="login.php">Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!--
+		<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        				<span class="sr-only">Toggle navigation</span>
+        				<span class="icon-bar"></span>
+        				<span class="icon-bar"></span>
+        				<span class="icon-bar"></span>
+      				</button>
+      				<a class="navbar-brand" href="#">Pocket Advisor</a>
+    			</div>
+    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      				<ul class="nav navbar-nav">
+        				<li class="active"><a href="login.php"> Home <span class="sr-only">(current)</span></a></li>
+        				<li><a href="about.php">About</a></li>
+        				<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
@@ -179,44 +208,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </div>
 </nav>
 
-	<head>
+<head>
 	<title>Basic Login Script</title>
+</head>
 
+<body>
+	<div class="row">
+    	<div class="col-md-5 col-md-offset-1">
+			<FORM NAME ="form1" METHOD ="POST" ACTION ="signup.php">
+				<form class="form-horizontal">
+  					<div class="row">
+          				<div class="col-lg-30">
+            				<div class="well bs-component">
+              					<form class="form-horizontal">
+                					<fieldset>
+										<legend>Create New Account</legend>
+                                        <div class="form-group">
+                                            <label for="inputPassword" class="col-lg-2 control-label">First Name</label>
+                                            <div class="col-lg-10">
+                                                <input type="fname" Name='fname' class="form-control" id="inputPassword" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail" class="col-lg-2 control-label">Username</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" Name='username' class="form-control" id="inputEmail" placeholder="Username" "<?PHP print $uname;?>" maxlength="20"> <?PHP print $errorMessage;?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                                            <div class="col-lg-10">
+                                                <input type="password" Name='password' class="form-control" id="inputPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                     <div class="form-group">
+                                        <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                                        <div class="col-lg-10">
+                                            <input type="password" Name='password' class="form-control" id="inputPassword" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <INPUT TYPE = "Submit" Name = "Submit1" class="btn btn-primary" VALUE = "Register">
+    	                                   </P>
+                                        </fieldset>
 
-	</head>
-	<body>
-<div class="row">
-    <div class="col-md-5 col-md-offset-1">
-
-
-
-<FORM NAME ="form1" METHOD ="POST" ACTION ="signup.php">
-
-	<form class="form-horizontal">
-  <div class="row">
-          <div class="col-lg-30">
-            <div class="well bs-component">
-              <form class="form-horizontal">
-                <fieldset>
-	<legend>Create New Account</legend>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Username</label>
-      <div class="col-lg-10">
-        <input type="text" Name='username' class="form-control" id="inputEmail" placeholder="Username" "<?PHP print $uname;?>" maxlength="20"> <?PHP print $errorMessage;?>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-      <div class="col-lg-10">
-        <input type="password" Name='password' class="form-control" id="inputPassword" placeholder="Password">
-      </div>
-    </div>
-
-		<INPUT TYPE = "Submit" Name = "Submit1" class="btn btn-primary" VALUE = "Register">
-	</P>
-  </fieldset>
-
-
+-->
 </FORM>
 <P>
 

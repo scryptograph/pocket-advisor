@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	//==========================================
 	$user_name = "root";
 	$pass_word = "";
-	$database = "login";
+	$database = "pocket-advisor";
 	$server = "127.0.0.1";
 
 	$db_handle = mysql_connect($server, $user_name, $pass_word);
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
 
-		$SQL = "SELECT * FROM login WHERE L1 = $uname AND L2 = md5($pword)";
+		$SQL = "SELECT * FROM user WHERE login = $uname AND password = md5($pword)";
 		$result = mysql_query($SQL);
 		$num_rows = mysql_num_rows($result);
 
