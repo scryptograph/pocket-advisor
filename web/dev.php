@@ -15,9 +15,9 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="login.php">Home </a></li>
+              <li><a href="index.php">Home </a></li>
               <li><a href="about.php">About</a></li>
-              <li><a href="login.php">Dev. Team</a></li>
+              <li class = "active"><a href="dev.php">Dev. Team<span class="sr-only">(current)</span></a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
               <div class="form-group">
@@ -27,7 +27,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right"> 
               <li><a href="login.php">Login</a></li>   
-              <li class="active"><a href="signup.php">Sign Up <span class="sr-only">(current)</span></a></li>
+              <li><a href="signup.php">Sign Up </a></li>
             </ul>
           </div>
         </div>

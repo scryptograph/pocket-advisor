@@ -17,6 +17,7 @@
 $uname = "";
 $pword = "";
 $fname = "";
+$mname = "";
 $lname = "";
 $email = "";
 $role = "Student";
@@ -43,9 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	//====================================================================
 	$uname = $_POST['username'];
 	$pword = $_POST['password'];
+    $email = $_POST['email'];
+    $fname = $_POST['fname'];
+    $mname = $_POST['mname'];
+    $lname = $_POST['lname'];
 
 	$uname = htmlspecialchars($uname);
 	$pword = htmlspecialchars($pword);
+    $fname = htmlspecialchars($fname);
+    $mname = htmlspecialchars($mname);
+    $lname = htmlspecialchars($lname);
+    $email = htmlspecialchars($email);
+    
 
 	//====================================================================
 	//	CHECK TO SEE IF U AND P ARE OF THE CORRECT LENGTH
@@ -63,11 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$errorMessage = $errorMessage . "Username must be between 10 and 20 characters" . "<BR>";
 	}
 
-	if ($pLength >= 8 && $pLength <= 16) {
+	if ($pLength >= 6 && $pLength <= 16) {
 		$errorMessage = "";
 	}
 	else {
-		$errorMessage = $errorMessage . "Password must be between 8 and 16 characters" . "<BR>";
+		$errorMessage = $errorMessage . "Password must be between 6 and 16 characters" . "<BR>";
 	}
 
 
@@ -92,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
+        $email = quote_smart($email, $db_handle);
+        $fname = quote_smart($email, $db_handle);
+        $mname = quote_smart($mname, $db_handle);
+        $lname = quote_smart($lname, $db_handle);
 
 	//====================================================================
 	//	CHECK THAT THE USERNAME IS NOT TAKEN
@@ -105,10 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$errorMessage = "Username already taken";
 		}
 		
-		else {
+		else {$SQL = "SELECT * FROM user";
+            $result = mysql_query($SQL);
+            $num_rows = mysql_num_rows($result);
 
-			$SQL = "INSERT INTO user (login, password) VALUES ($uname, md5($pword))";
-
+            $SQL = "INSERT INTO user (id ,login, password, email, first_name, middle_name, last_name) VALUES ($num_rows, $uname, md5($pword), $email, $fname, $mname, $lname)";
 			$result = mysql_query($SQL);
 
 			mysql_close($db_handle);
@@ -145,69 +160,99 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="login.php">Pocket Advisor</a>
+            <a class="navbar-brand" href="login.php">Software Engineering Project</a>
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="login.php">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="index.php">Home </a></li>
               <li><a href="about.php">About</a></li>
+              <li><a href="login.php">Dev. Team</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-right" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="login.php">Login</a></li>
+            <ul class="nav navbar-nav navbar-right"> 
+              <li><a href="login.php">Login</a></li>   
+              <li class="active"><a href="signup.php">Sign Up <span class="sr-only">(current)</span></a></li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
-    <!--
-		<nav class="navbar navbar-default">
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        				<span class="sr-only">Toggle navigation</span>
-        				<span class="icon-bar"></span>
-        				<span class="icon-bar"></span>
-        				<span class="icon-bar"></span>
-      				</button>
-      				<a class="navbar-brand" href="#">Pocket Advisor</a>
-    			</div>
-    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      				<ul class="nav navbar-nav">
-        				<li class="active"><a href="login.php"> Home <span class="sr-only">(current)</span></a></li>
-        				<li><a href="about.php">About</a></li>
-        				<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
+    <div class="bs-docs-section col-lg-offset-1" >
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1 id="forms">Pocket Advisor</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal"  METHOD ="POST" ACTION ="signup.php">
+                <fieldset>
+                  <legend>Register New User</legend>
+                  <div class="form-group">
+                    <label for="username" Name="username" class="col-lg-2 control-label">Username</label>
+                    <div class="col-lg-10">
+                      <input type="text" Name = "username" class="form-control" id="username" placeholder="Username" "<?PHP print $uname;?>" maxlength="20"> <?PHP print $errorMessage;?>
+                      <span class="help-block">Enter unique Username with a minimum of 8 characters</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" Name="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" Name = "password" class="form-control" id="password" placeholder="Password" "<?PHP print $pword;?>" maxlength="16">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Request Admin Access
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name = "email" id="email" placeholder=" Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Name</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name = "fname" id="fname" placeholder="First Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label"></label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name = "mname" id="mname" placeholder="Middle Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label"></label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name = "lname" id="lname" placeholder="Last Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <INPUT TYPE = "Submit" Name = "Submit1" class="btn btn-primary" VALUE = "Register">
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-4 col-lg-offset-1">
+              
+          </div>
+<!--
 <head>
 	<title>Basic Login Script</title>
 </head>
@@ -251,8 +296,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     	                                   </P>
                                         </fieldset>
 
--->
+
 </FORM>
+-->
 <P>
 
 	</body>

@@ -81,61 +81,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 <html>
-<head>
-<title>Basic Login Script</title>
-</head>
-<body>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <div class="bs-component">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="login.php">Software Engineering Project</a>
+          </div>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Pocket Advisor</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="login.php">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="about.php">About</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="index.php">Home </a></li>
+              <li><a href="about.php">About</a></li>
+              <li><a href="login.php">Dev. Team</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right"> 
+              <li class = "active"><a href="login.php">Login<span class="sr-only">(current)</span></a></li>   
+              <li><a href="signup.php">Sign Up </a></li>
+            </ul>
+          </div>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
+      </nav>
     </div>
-  </div>
-</nav>
-<!-- End Navbar -->
 
+    <div class="bs-docs-section col-lg-offset-1" >
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1 id="forms">Pocket Advisor</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal"  METHOD ="POST" ACTION ="login.php">
+                <fieldset>
+                  <legend>Admin Portal Login</legend>
+                  <div class="form-group">
+                    <label for="username" Name="username" class="col-lg-2 control-label">Username</label>
+                    <div class="col-lg-10">
+                      <input type="text" Name = "username" class="form-control" id="username" placeholder="Username" "<?PHP print $uname;?>" maxlength="20"> <?PHP print $errorMessage;?>
+                      <span class="help-block">Enter unique Username with a minimum of 8 characters</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" Name="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" Name = "password" class="form-control" id="password" placeholder="Password" "<?PHP print $pword;?>" maxlength="16">
+                      <div class="checkbox">
+                      </div>
+                    </div>
+                  </div>
+                  <INPUT TYPE = "Submit" class="btn btn-primary" Name = "Submit1"  VALUE = "Login">
+                  <a href="signup.php" class="btn btn-primary">Sign Up</a>
+                  
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-4 col-lg-offset-1">
+              
+          </div>
+
+<!-- End Navbar -->
+<!--
 <div class="row">
     <div class="col-md-5 col-md-offset-1">
 
 <FORM NAME ="form1" METHOD ="POST" ACTION ="login.php">
 <form class="form-horizontal">
   <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1 id="forms">Pocket Advisor</h1>
+            </div>
+          </div>
+        </div>
           <div class="col-lg-30">
             <div class="well bs-component">
               <form class="form-horizontal">
@@ -159,6 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   </fieldset>
 
 </FORM>
+<-->
 </div></div>
 <P>
 <?PHP print $errorMessage;?>
