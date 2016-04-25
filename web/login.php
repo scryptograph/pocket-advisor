@@ -41,9 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
 
-		$SQL = "SELECT * FROM user WHERE login = $uname AND password = md5($pword)";
+		$SQL1 = "SELECT * FROM user WHERE login = $uname AND password = md5($pword) AND role = 'ADMIN'";
+    $SQL = "SELECT * FROM user WHERE login = $uname AND password = md5($pword)";
 		$result = mysql_query($SQL);
+    $result1 = mysql_query($SQL1);
+
 		$num_rows = mysql_num_rows($result);
+    $num_rows1 = mysql_num_rows($result1);
 
 	//====================================================
 	//	CHECK TO SEE IF THE $result VARIABLE IS TRUE
@@ -51,15 +55,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if ($result) {
 			if ($num_rows > 0) {
-				session_start();
-				$_SESSION['login'] = "1";
-				header ("Location: page1.php");
+        if ($result1){
+          if ($num_rows1){
+				    session_start();
+				    $_SESSION['login'] = "1";
+				    header ("Location: page1.php");
+          }
+          else{
+            $errorMessage = $errorMessage . "LOL.. You Wish You Had Admin Access." . "<BR>";
+          }
+        }
 			}
 			else {
-        $errorMessage = "Username or Password Incorrect";
-				//session_start();
-				//$_SESSION['login'] = "";
-				//header ("Location: login.php");
+        $errorMessage = $errorMessage . "Incorrect Username or Password" . "<BR>";
 			}	
 		}
 		else {

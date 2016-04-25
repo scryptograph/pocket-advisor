@@ -1,6 +1,8 @@
+
 <?PHP
-	session_start();
+  session_start();
 	session_destroy();
+  header( "refresh:3; url=index.php" );
 ?>
 
 	<html>
@@ -56,7 +58,7 @@
 
 
 
-	User Logged Out
+	User Logged Out.. Redirecting to Home Page <BR>
 
 	<a href="login.php"> Click here to go to Home Page</a>
 

@@ -1,10 +1,11 @@
 <?PHP
 session_start();
 if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
-	header ("Location: login3.php");
+	header ("Location: login.php");
 }
-else{
-  <html>
+?>
+<!DOCTYPE html>
+<html>
   <link href="css/bootstrap.min.css" rel="stylesheet">
     <div class="bs-component">
       <nav class="navbar navbar-default">
@@ -32,7 +33,7 @@ else{
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right"> 
-              <li><a href="login.php">Login</a></li>   
+              <li><a href="page2.php">Log Out</a></li>   
               <li class="active"><a href="signup.php">Sign Up <span class="sr-only">(current)</span></a></li>
             </ul>
           </div>
@@ -51,7 +52,7 @@ else{
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-4">
             <div class="list-group table-of-contents">
-              <a class="list-group-item" href="#navbar"></a>
+              <a class="list-group-item" href="#navbar">Give User Admin Access</a>
               <a class="list-group-item" href="#buttons">Buttons</a>
               <a class="list-group-item" href="#typography">Typography</a>
               <a class="list-group-item" href="#tables">Tables</a>
@@ -65,9 +66,5 @@ else{
           </div>
         </div>
       </div>
-  </body>
-  </html>
-
-}
-?>
-
+	</body>
+	</html>

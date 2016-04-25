@@ -24,6 +24,7 @@ $role = "Student";
 $gpa = "NULL";
 $errorMessage = "";
 $num_rows = 0;
+$admin_access = "STUDENT";
 
 function quote_smart($value, $handle) {
 
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
+    $admin_access = @$_POST['admin_access'];
 
 	$uname = htmlspecialchars($uname);
 	$pword = htmlspecialchars($pword);
@@ -55,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $mname = htmlspecialchars($mname);
     $lname = htmlspecialchars($lname);
     $email = htmlspecialchars($email);
+    $admin_access = htmlspecialchars($admin_access);
     
 
 	//====================================================================
@@ -66,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$uLength = strlen($uname);
 	$pLength = strlen($pword);
 
-	if ($uLength >= 10 && $uLength <= 20) {
+	if ($uLength >= 8 && $uLength <= 20) {
 		$errorMessage = "";
 	}
 	else {
@@ -106,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $fname = quote_smart($email, $db_handle);
         $mname = quote_smart($mname, $db_handle);
         $lname = quote_smart($lname, $db_handle);
+        $admin_access = quote_smart($admin_access, $db_handle);
 
 	//====================================================================
 	//	CHECK THAT THE USERNAME IS NOT TAKEN
@@ -123,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $result = mysql_query($SQL);
             $num_rows = mysql_num_rows($result);
 
-            $SQL = "INSERT INTO user (id ,login, password, email, first_name, middle_name, last_name) VALUES ($num_rows, $uname, md5($pword), $email, $fname, $mname, $lname)";
+            $SQL = "INSERT INTO user (id ,login, password, email, first_name, middle_name, last_name, role) VALUES ($num_rows, $uname, md5($pword), $email, $fname, $mname, $lname, $admin_access)";
 			$result = mysql_query($SQL);
 
 			mysql_close($db_handle);
@@ -211,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                       <input type="password" Name = "password" class="form-control" id="password" placeholder="Password" "<?PHP print $pword;?>" maxlength="16">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox"> Request Admin Access
+                          <input type="checkbox" name = "admin_access" id = "admin_access" value = "REQUEST"> Request Admin Access
                         </label>
                       </div>
                     </div>
