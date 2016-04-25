@@ -1,3 +1,82 @@
+<?PHP
+  $errorMessage = "";
+  $user_id = "";
+
+//==========================================
+//  ESCAPE DANGEROUS SQL CHARACTERS
+//==========================================
+function quote_smart($value, $handle) {
+
+   if (get_magic_quotes_gpc()) {
+       $value = stripslashes($value);
+   }
+
+   if (!is_numeric($value)) {
+       $value = "'" . mysql_real_escape_string($value, $handle) . "'";
+   }
+   return $value;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $user_id = $_POST['user_id'];
+
+  $user_id = htmlspecialchars($user_id);
+
+  //==========================================
+  //  CONNECT TO THE LOCAL DATABASE
+  //==========================================
+  $user_name = "root";
+  $pass_word = "";
+  $database = "pocket-advisor";
+  $server = "127.0.0.1";
+
+  $db_handle = mysql_connect($server, $user_name, $pass_word);
+  $db_found = mysql_select_db($database, $db_handle);
+
+  if ($db_found) {
+
+    $user_id = quote_smart($user_id, $db_handle);
+
+    $SQL = "SELECT * FROM user WHERE id = $user_id ";
+    $result = mysql_query($SQL);
+    $num_rows = mysql_num_rows($result);
+
+
+
+  //====================================================
+  //  CHECK TO SEE IF THE $result VARIABLE IS TRUE
+  //====================================================
+
+    if ($result) {
+      if ($num_rows > 0) {
+        $SQL1 = "UPDATE user SET role = 'ADMIN' WHERE id = $user_id";
+        $result2 = mysql_query($SQL1);
+        $errorMessage = "SUCCESS";
+        if ($result2) {
+          $errorMessage = "UPDATED";
+        }
+      }
+      else {
+        
+        $errorMessage = "FAIL";
+      } 
+    }
+    else {
+      $errorMessage = "Error logging on foo";
+    }
+
+  mysql_close($db_handle);
+
+  }
+
+  else {
+    $errorMessage = "Error logging on";
+  }
+
+}
+
+?>
+
 <html>
   <link href="css/bootstrap.min.css" rel="stylesheet">
     <div class="bs-component">
@@ -33,3 +112,12 @@
         </div>
       </nav>
     </div>
+
+    <form METHOD ="POST" ACTION ="test.php">
+      Username: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
+      <P align = center>
+        <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Login">
+      </P>
+    </FORM>
+</html>
+

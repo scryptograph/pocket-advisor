@@ -34,7 +34,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
             </form>
             <ul class="nav navbar-nav navbar-right"> 
               <li><a href="page2.php">Log Out</a></li>   
-              <li class="active"><a href="signup.php">Sign Up <span class="sr-only">(current)</span></a></li>
+              <li><a href="signup.php">Sign Up </a></li>
             </ul>
           </div>
         </div>
@@ -46,22 +46,22 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
         <div class="row">
           <div class="col-lg-8 col-md-7 col-sm-6">
             <h1>Pocket Advisor Admin Panel</h1>
-            <p class="lead">A friendly foundation</p>
+            <p class="lead">Welcome </p>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-4">
+          <div class="col-lg-2 col-md-3 col-sm-4">
             <div class="list-group table-of-contents">
-              <a class="list-group-item" href="#navbar">Give User Admin Access</a>
-              <a class="list-group-item" href="#buttons">Buttons</a>
-              <a class="list-group-item" href="#typography">Typography</a>
-              <a class="list-group-item" href="#tables">Tables</a>
-              <a class="list-group-item" href="#forms">Forms</a>
-              <a class="list-group-item" href="#navs">Navs</a>
-              <a class="list-group-item" href="#indicators">Indicators</a>
-              <a class="list-group-item" href="#progress-bars">Progress bars</a>
-              <a class="list-group-item" href="#containers">Containers</a>
-              <a class="list-group-item" href="#dialogs">Dialogs</a>
+              <a class="list-group-item"  href="admin_access.php">Give User Admin Access</a>
+              <a class="list-group-item" href="#buttons">Delete User</a>
+              <a class="list-group-item" href="#typography">Add University</a>
+              <a class="list-group-item" href="#tables">Add Course</a>
+              <a class="list-group-item" href="#forms">Modify Course</a>
+              <a class="list-group-item" href="#navs">Delete Course</a>
+              <a class="list-group-item" href="#indicators">Add Class</a>
+              <a class="list-group-item" href="#progress-bars">Modify Course</a>
+              <a class="list-group-item" href="#containers">Delete Course</a>
+              <a class="list-group-item" href="#dialogs">Delete Account</a>
             </div>
           </div>
         </div>
