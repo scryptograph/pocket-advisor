@@ -3,9 +3,8 @@ session_start();
 if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
 	header ("Location: login3.php");
 }
-?>
-
-<html>
+else{
+  <html>
   <link href="css/bootstrap.min.css" rel="stylesheet">
     <div class="bs-component">
       <nav class="navbar navbar-default">
@@ -52,7 +51,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-4">
             <div class="list-group table-of-contents">
-              <a class="list-group-item" href="#navbar">Navbar</a>
+              <a class="list-group-item" href="#navbar"></a>
               <a class="list-group-item" href="#buttons">Buttons</a>
               <a class="list-group-item" href="#typography">Typography</a>
               <a class="list-group-item" href="#tables">Tables</a>
@@ -66,5 +65,9 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
           </div>
         </div>
       </div>
-	</body>
-	</html>
+  </body>
+  </html>
+
+}
+?>
+
