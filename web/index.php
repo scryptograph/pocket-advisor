@@ -61,7 +61,7 @@
         </div>
       </nav>
     </div>
-    <div class="bs-docs-section">
+    <div class="bs-docs-section col-lg-offset-1">
 
         <div class="row">
           <div class="col-lg-12">

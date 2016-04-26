@@ -1,85 +1,90 @@
 <?PHP
-$errorMessage = "";
+  $errorMessage = "";
+  $user_id = "";
+
   session_start();
   if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
   	header ("Location: login.php");
 
-  $user_id = "";
-  $role = "ADMIN";
+
+//==========================================
+//  ESCAPE DANGEROUS SQL CHARACTERS
+//==========================================
+function quote_smart($value, $handle) {
+
+   if (get_magic_quotes_gpc()) {
+       $value = stripslashes($value);
+   }
+
+   if (!is_numeric($value)) {
+       $value = "'" . mysql_real_escape_string($value, $handle) . "'";
+   }
+   return $value;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $user_id = $_POST['user_id'];
+
+  $user_id = htmlspecialchars($user_id);
+
   //==========================================
-  //  ESCAPE DANGEROUS SQL CHARACTERS
+  //  CONNECT TO THE LOCAL DATABASE
   //==========================================
-  function quote_smart($value, $handle) {
+  $user_name = "root";
+  $pass_word = "";
+  $database = "pocket-advisor";
+  $server = "127.0.0.1";
 
-     if (get_magic_quotes_gpc()) {
-         $value = stripslashes($value);
-     }
+  $db_handle = mysql_connect($server, $user_name, $pass_word);
+  $db_found = mysql_select_db($database, $db_handle);
 
-     if (!is_numeric($value)) {
-         $value = "'" . mysql_real_escape_string($value, $handle) . "'";
-     }
-     return $value;
-  }
+  if ($db_found) {
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $user_id = $_POST['user_id'];
+    $user_id = quote_smart($user_id, $db_handle);
 
-    $user_id = htmlspecialchars($user_id);
-    $role = htmlspecialchars($role);
+    $SQL = "SELECT * FROM user WHERE id = $user_id ";
+    $result = mysql_query($SQL);
+    $num_rows = mysql_num_rows($result);
 
-    //==========================================
-    //  CONNECT TO THE LOCAL DATABASE
-    //==========================================
-    $user_name = "root";
-    $pass_word = "";
-    $database = "pocket-advisor";
-    $server = "127.0.0.1";
 
-    $db_handle = mysql_connect($server, $user_name, $pass_word);
-    $db_found = mysql_select_db($database, $db_handle);
 
-    if ($db_found) {
+  //====================================================
+  //  CHECK TO SEE IF THE $result VARIABLE IS TRUE
+  //====================================================
 
-      $user_id = quote_smart($user_id, $db_handle);
-      $role = quote_smart($role, $db_handle);
-
-      $SQL1 = "UPDATE user SET role = $role WHERE id = $user_id";
-      $SQL = "SELECT * FROM user WHERE id = $user_id";
-      $result = mysql_query($SQL);
-      $result1 = mysql_query($SQL1);
-
-      $num_rows = mysql_num_rows($result);
-      
-    //====================================================
-    //  CHECK TO SEE IF THE $result VARIABLE IS TRUE
-    //====================================================
-
-      if ($result) {
-        if ($num_rows > 0) {
-          $errorMessage = "YES";
+    if ($result) {
+      if ($num_rows > 0) {
+        $SQL1 = "UPDATE user SET role = 'ADMIN' WHERE id = $user_id";
+        $result2 = mysql_query($SQL1);
+        $errorMessage = "SUCCESS";
+        if ($result2) {
+          $errorMessage = "UPDATED";
         }
-        else {
-          $errorMessage = $errorMessage . "WTF" . "<BR>";
-        } 
       }
       else {
-        $errorMessage = "Whoops.. User Does Not Exist";
-      }
-
-    mysql_close($db_handle);
-
+        
+        $errorMessage = "FAIL";
+      } 
     }
-
     else {
-      $errorMessage = "Error logging on";
+      $errorMessage = "Error logging on foo";
     }
-  }}
+
+  mysql_close($db_handle);
+
+  }
+
+  else {
+    $errorMessage = "Error logging on";
+  }
+}
+}
 ?>
 
 <!DOCTYPE html>
 <html>
   <link href="css/bootstrap.min.css" rel="stylesheet">
-    <div class="bs-component">
+    <div class="container" align="left"> 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -97,6 +102,7 @@ $errorMessage = "";
               <li><a href="index.php">Home </a></li>
               <li><a href="about.php">About</a></li>
               <li><a href="login.php">Dev. Team</a></li>
+              <li><a href="page1.php">Admin Portal</a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
               <div class="form-group">
@@ -111,43 +117,61 @@ $errorMessage = "";
           </div>
         </div>
       </nav>
-  <body>
-    <div class="container">
-
-      <div class="page-header" id="banner">
-        <div class="row">
-          <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Pocket Advisor Admin Panel</h1>
-            <p class="lead">Give User Admin Access </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2 col-md-3 col-sm-4">
-            <div class="list-group table-of-contents">
-              <a class="list-group-item" href="#navbar">Give User Admin Access</a>
-              <a class="list-group-item" href="#buttons">Delete User</a>
-              <a class="list-group-item" href="#typography">Add University</a>
-              <a class="list-group-item" href="#tables">Add Course</a>
-              <a class="list-group-item" href="#forms">Modify Course</a>
-              <a class="list-group-item" href="#navs">Delete Course</a>
-              <a class="list-group-item" href="#indicators">Add Class</a>
-              <a class="list-group-item" href="#progress-bars">Modify Class</a>
-              <a class="list-group-item" href="#containers">Delete Class</a>
-              <a class="list-group-item" href="#dialogs">Delete Account</a>
+      <body>
+        <div class="page-header" id="banner">
+          <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+              <h1>Pocket Advisor Admin Panel</h1>
+              <p class="lead">Give User Admin Access </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-lg-offset-1">
-
-        <form class="bs-component" METHOD ="POST" ACTION ="admin_access.php">
-          <div class="form-group">
-            <label class="control-label" for="focusedInput">Enter User ID to Grant Admin Access</label> <?PHP print $errorMessage;?>
-            <input class="form-control" id="user_id" type="text" value="0" name="user_id" > 
-            <INPUT TYPE = "Submit" class="btn btn-primary" Name = "Submit"  VALUE = "LEGGO">
+          <div class="row">
+            <div class="col-lg-3"><div class="container" align="left">
+              <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                  <div class="list-group table-of-contents">
+                    <a class="list-group-item" href="#navbar">Give User Admin Access</a>
+                    <a class="list-group-item" href="#buttons">Delete User</a>
+                    <a class="list-group-item" href="#typography">Add University</a>
+                    <a class="list-group-item" href="#tables">Add Course</a>
+                    <a class="list-group-item" href="#forms">Modify Course</a>
+                    <a class="list-group-item" href="#navs">Delete Course</a>
+                    <a class="list-group-item" href="#indicators">Add Class</a>
+                    <a class="list-group-item" href="#progress-bars">Modify Class</a>
+                    <a class="list-group-item" href="#containers">Delete Class</a>
+                    <a class="list-group-item" href="#dialogs">Delete Account</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
-      </div>
-  <?PHP print $errorMessage;?>
-	</body>
+          <br> <br>
+          <div class="col-lg-6" align="left">
+            <div class="form-group">
+              <!--<form METHOD ="POST" ACTION ="admin_access.php">
+                <div class="form-group">
+                  <label for="inputEmail" class="col-lg-8 control-label">Enter User ID To Grant Admin Access :</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" name = "user_id" id="user_id" placeholder="User ID" value="<?PHP print $user_id;?>">
+                    <?PHP print($errorMessage) ?>
+                  </div>
+                </div>
+                <p>
+                <div class="form-group">
+                  <div class="col-lg-10 " align="left">
+                    <INPUT TYPE = "Submit" Name = "Submit1" class="btn btn-primary" VALUE = "Submit">
+                  </div>
+                </div>
+              </p>
+              </form> -->
+              <form METHOD ="POST" ACTION ="admin_access.php">
+      Username: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
+      <P align = center>
+        <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Login">
+      </P>
+    </FORM>
+          </div>
+        </div>
+      </body>
+    <?PHP print $errorMessage;?>
 	</html>

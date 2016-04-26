@@ -76,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 ?>
-
 <html>
   <link href="css/bootstrap.min.css" rel="stylesheet">
     <div class="bs-component">
@@ -94,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="login.php">Home </a></li>
+              <li><a href="index.php">Home </a></li>
               <li><a href="about.php">About</a></li>
               <li><a href="login.php">Dev. Team</a></li>
             </ul>
@@ -112,12 +111,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
       </nav>
     </div>
+<!--<html>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <div class="container" align="left"> 
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="login.php">Software Engineering Project</a>
+          </div>
 
-    <form METHOD ="POST" ACTION ="test.php">
-      Username: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
-      <P align = center>
-        <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Login">
-      </P>
-    </FORM>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="index.php">Home </a></li>
+              <li><a href="about.php">About</a></li>
+              <li><a href="login.php">Dev. Team</a></li>
+              <li><a href="page1.php">Admin Portal</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right"> 
+              <li><a href="page2.php">Log Out</a></li>   
+              <li><a href="signup.php">Sign Up </a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>-->
+    <div class="bs-docs-section col-lg-offset-1" id="banner">
+      <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-6">
+          <h1>Pocket Advisor Admin Panel</h1>
+          <p class="lead">Give User Admin Access </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="container" align="left">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="list-group table-of-contents">
+                  <a class="list-group-item" href="#navbar">Give User Admin Access</a>
+                  <a class="list-group-item" href="#buttons">Revoke Admin Access</a>
+                  <a class="list-group-item" href="#typography">Add University</a>
+                  <a class="list-group-item" href="#tables">Add Course</a>
+                  <a class="list-group-item" href="#forms">Modify Course</a>
+                  <a class="list-group-item" href="#navs">Delete Course</a>
+                  <a class="list-group-item" href="#indicators">Add Class</a>
+                  <a class="list-group-item" href="#progress-bars">Modify Class</a>
+                  <a class="list-group-item" href="#containers">Delete Class</a>
+                  <a class="list-group-item" href="#dialogs">Delete Account</a>
+                </div>
+              </div>
+              <form METHOD ="POST" ACTION ="test.php">
+            Enter User ID to Grant Admin Access: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
+            <P align = center>
+              <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Submit">
+            </P>
+          </FORM>
+            </div>
+          </div>
+        </div>
+      </div>
 </html>
 
