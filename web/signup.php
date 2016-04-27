@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$uname = quote_smart($uname, $db_handle);
 		$pword = quote_smart($pword, $db_handle);
         $email = quote_smart($email, $db_handle);
-        $fname = quote_smart($email, $db_handle);
+        $fname = quote_smart($fname, $db_handle);
         $mname = quote_smart($mname, $db_handle);
         $lname = quote_smart($lname, $db_handle);
         $admin_access = quote_smart($admin_access, $db_handle);

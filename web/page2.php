@@ -53,7 +53,7 @@
     </div>
   </div>
 </nav>
-	<body>
+	<body align="center">
 
 
 

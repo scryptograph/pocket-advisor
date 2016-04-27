@@ -61,15 +61,15 @@
         </div>
       </nav>
     </div>
-    <div class="bs-docs-section col-lg-offset-1">
+    <div class="bs-docs-section " align="center">
 
         <div class="row">
           <div class="col-lg-12">
             <div class="bs-component">
               <div class="jumbotron">
-                <h1>Pocket Advisor</h1>
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+                <h1>P o c k e t - A d v i s o r</h1>
+                <p>Take Charge Of Your Academic System. One Stop Degree Management Tool.</p>
+                
               </div>
             </div>
           </div>

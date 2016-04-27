@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if ($result) {
       if ($num_rows > 0) {
-        $SQL1 = "UPDATE user SET role = 'ADMIN' WHERE id = $user_id";
+        $SQL1 = "UPDATE user SET role = 'STUDENT' WHERE id = $user_id";
         $result2 = mysql_query($SQL1);
         $errorMessage = "SUCCESS";
         if ($result2) {
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       <div class="row">
         <div class="col-lg-8 col-md-7 col-sm-6">
           <h1>Pocket Advisor Admin Panel</h1>
-          <p class="lead">Give User Admin Access </p>
+          <p class="lead">Revoke Admin Access </p>
         </div>
       </div>
       <div class="row">
@@ -174,8 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                   <a class="list-group-item" href="#dialogs">Delete Account</a>
                 </div>
               </div>
-              <form METHOD ="POST" ACTION ="test.php">
-            Enter User ID to Grant Admin Access: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
+              <form METHOD ="POST" ACTION ="revoke.php">
+            Enter User ID to Revoke Admin Access: <INPUT TYPE = 'TEXT' Name ='user_id'  value="<?PHP print $user_id;?>" maxlength="20"> <?PHP print($errorMessage) ?>
             <P align = center>
               <INPUT TYPE = "Submit" Name = "Submit1"  VALUE = "Submit">
             </P>

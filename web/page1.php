@@ -53,14 +53,11 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
           <div class="col-lg-2 col-md-3 col-sm-4">
             <div class="list-group table-of-contents">
               <a class="list-group-item"  href="test.php">Give User Admin Access</a>
-              <a class="list-group-item" href="#buttons">Revoke Admin Access</a>
-              <a class="list-group-item" href="#typography">Add University</a>
+              <a class="list-group-item" href="revoke.php">Revoke Admin Access</a>
+              <a class="list-group-item" href="view_admin_req.php">View Admin Requests</a>
               <a class="list-group-item" href="#tables">Add Course</a>
               <a class="list-group-item" href="#forms">Modify Course</a>
               <a class="list-group-item" href="#navs">Delete Course</a>
-              <a class="list-group-item" href="#indicators">Add Class</a>
-              <a class="list-group-item" href="#progress-bars">Modify Course</a>
-              <a class="list-group-item" href="#containers">Delete Course</a>
               <a class="list-group-item" href="#dialogs">Delete Account</a>
             </div>
           </div>
