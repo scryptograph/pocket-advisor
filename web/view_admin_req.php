@@ -84,7 +84,7 @@
                   <a class="list-group-item" href="test.php">Give User Admin Access</a>
                   <a class="list-group-item" href="revoke.php">Revoke Admin Access</a>
                   <a class="list-group-item" href="view_admin_req.php">View Admin Requests</a>
-                  <a class="list-group-item" href="#tables">Add Course</a>
+                  <a class="list-group-item" href="add_course.php">Add Course</a>
                   <a class="list-group-item" href="#forms">Modify Course</a>
                   <a class="list-group-item" href="#navs">Delete Course</a>
                   <a class="list-group-item" href="#dialogs">Delete Account</a>

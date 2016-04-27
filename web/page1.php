@@ -34,34 +34,34 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] != '')) {
             </form>
             <ul class="nav navbar-nav navbar-right"> 
               <li><a href="page2.php">Log Out</a></li>   
-              <li><a href="signup.php">Sign Up </a></li>
+              <li class="active"><a href="signup.php">Sign Up <span class="sr-only">(current)</span></a></li>
             </ul>
           </div>
         </div>
       </nav>
-  <body>
-    <div class="container">
-
-      <div class="page-header" id="banner">
-        <div class="row">
-          <div class="col-lg-8 col-md-7 col-sm-6">
-            <h1>Pocket Advisor Admin Panel</h1>
-            <p class="lead">Welcome </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2 col-md-3 col-sm-4">
-            <div class="list-group table-of-contents">
-              <a class="list-group-item"  href="test.php">Give User Admin Access</a>
-              <a class="list-group-item" href="revoke.php">Revoke Admin Access</a>
-              <a class="list-group-item" href="view_admin_req.php">View Admin Requests</a>
-              <a class="list-group-item" href="#tables">Add Course</a>
-              <a class="list-group-item" href="#forms">Modify Course</a>
-              <a class="list-group-item" href="#navs">Delete Course</a>
-              <a class="list-group-item" href="#dialogs">Delete Account</a>
-            </div>
-          </div>
+    </div>
+    <div class="bs-docs-section col-lg-offset-1" id="banner">
+      <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-6">
+          <h1>Pocket Advisor Admin Panel</h1>
+          <p class="lead">Main Menu </p>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="container" align="left">
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="list-group table-of-contents">
+                  <a class="list-group-item" href="test.php">Give User Admin Access</a>
+                  <a class="list-group-item" href="revoke.php">Revoke Admin Access</a>
+                  <a class="list-group-item" href="view_admin_req.php">View Admin Requests</a>
+                  <a class="list-group-item" href="#add_course.php">Add Course</a>
+                  <a class="list-group-item" href="#forms">Modify Course</a>
+                  <a class="list-group-item" href="#navs">Delete Course</a>
+                  <a class="list-group-item" href="#dialogs">Delete Account</a>
+                </div>
+              </div>
+                    </div>
 	</body>
 	</html>
