@@ -101,7 +101,6 @@
               <table class="table table-striped table-hover ">
                <tr>
                   <?php
-                      $i=0;
                      //print the header
                      foreach($colNames as $colName)
                      {  
