@@ -46,17 +46,15 @@ The Directory will look as follows
 
 		-pocket-advisor
 
-	  	-index.php
+	  		- web
+	  		
+	  			-index.php
+	  			
+	  			-database.php
+	  			
+	  			- ...
 
-	  	-README
-
-	  	-CREATE_TABLE.sql
-
-	  	-INSERT_TABLE.sql
-
-	  	- ...
-
-	  	- ...
+	  			- ...
 
 3. Click on Admin on MySQL in the XAMPP Control Panel( or go to localhost:8080/phpmyadmin)
 
